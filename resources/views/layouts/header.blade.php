@@ -3,7 +3,7 @@
         <div class="container">
             <div class="header-wrap flex justify-between items-center">
                 <div class="logo w-[12rem]">
-                    <a href="{{ route('home') }}"><img src="assets/imgs/logo/logo.png" class="" alt="logo"></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('assets/imgs/logo/logo.png')}}" class="" alt="logo"></a>
                 </div>
                 <div class="flex-grow px-20">
                     <form action="#" class="w-100">
@@ -41,7 +41,7 @@
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="{{ route('cart') }}">
-                                    <img alt="Yusuf Isawi" src="assets/imgs/theme/icons/icon-cart.svg">
+                                    <img alt="Yusuf Isawi" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg')}}">
                                     <span class="pro-count blue">2</span>
                                 </a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2 border-gray-200">
@@ -49,7 +49,7 @@
                                         <li>
                                             <div class="shopping-cart-img">
                                                 <a href="product-details.html"><img alt="Yusuf Isawi"
-                                                        src="assets/imgs/shop/thumbnail-3.jpg"></a>
+                                                        src="{{ asset('assets/imgs/shop/thumbnail-3.jpg')}}"></a>
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4><a href="product-details.html">Daisy Casual Bag</a></h4>

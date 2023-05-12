@@ -121,7 +121,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="image product-thumbnail"><img
-                                                src="assets/imgs/shop/product-1-1.jpg" alt="#"></td>
+                                                src="{{ asset('assets/imgs/shop/product-1-1.jpg')}}" alt="#"></td>
                                         <td>
                                             <h5><a href="product-details.html">Yidarton Women Summer Blue</a></h5>
                                             <span class="product-qty">x 2</span>

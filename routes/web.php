@@ -5,6 +5,7 @@ use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Livewire\Cart;
 use App\Http\Livewire\Checkout;
 use App\Http\Livewire\Home;
+use App\Http\Livewire\ProductDetails;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [Home::class, 'render'])->name('home');
+Route::get('/product/{product_id}', [ProductDetails::class, 'render'])->name('product.details');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

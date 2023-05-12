@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('price');
             $table->decimal('old_price');
             $table->string('SKU');
-            $table->enum('stokck_status', ['instock', 'outstock']);
+            $table->enum('stock_status', ['instock', 'outstock']);
             $table->unsignedInteger('quantity')->default(10);
             $table->string('image');
             $table->text('images');
