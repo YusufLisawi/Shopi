@@ -6,21 +6,22 @@
                     <a href="{{ route('home') }}"><img src="assets/imgs/logo/logo.png" class="" alt="logo"></a>
                 </div>
                 <div class="flex-grow px-20">
-                        <form action="#" class="w-100">
-                            <x-text-input id="search" name="search" type="text" placeholder="Search for items..." class="mt-1 block w-full" />
-                        </form>
+                    <form action="#" class="w-100">
+                        <x-text-input id="search" name="search" type="text" placeholder="Search for items..."
+                            class="mt-1 block w-full" />
+                    </form>
                 </div>
                 <div class="header-action-right">
                     <div class="header-action-2">
                         @auth
                             <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
-                                <nav>
-                                    <ul>
+                                <nav class="">
+                                    <ul class="">
                                         <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu">
                                                 <li><a href="#">Dashboard</a></li>
                                                 <li><a href="#">Orders</a></li>
-                                                <li><a href="{{route('profile.edit')}}">Settings</a></li>
+                                                <li><a href="{{ route('profile.edit') }}">Account Settings</a></li>
                                                 <li>
                                                     <form method="POST" action="{{ route('logout') }}">
                                                         @csrf
@@ -36,11 +37,11 @@
                                 </nav>
                             </div>
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="{{route('cart')}}">
+                                <a class="mini-cart-icon" href="{{ route('cart') }}">
                                     <img alt="Yusuf Isawi" src="assets/imgs/theme/icons/icon-cart.svg">
                                     <span class="pro-count blue">2</span>
                                 </a>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                <div class="cart-dropdown-wrap cart-dropdown-hm2 border-gray-200">
                                     <ul>
                                         <li>
                                             <div class="shopping-cart-img">
@@ -61,20 +62,18 @@
                                             <h4>Total <span>$4000.00</span></h4>
                                         </div>
                                         <div class="shopping-cart-button">
-                                            <a href="cart.html" class="outline">View cart</a>
-                                            <a href="checkout.html">Checkout</a>
+                                            <a href="{{ route('cart') }}" class="btn btn-sm btn-secondary">View cart</a>
+                                            <a href="{{ route('checkout') }}" class="btn btn-sm">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @else
-                            <a href="{{ route('login') }}"
-                                class="pr-4 text-md font-semibold ">Log
+                            <a href="{{ route('login') }}" class="pr-4 text-md font-semibold ">Log
                                 in</a>
 
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
-                                    class="btn btn-sm btn-default">Register</a>
+                                <a href="{{ route('register') }}" class="btn btn-sm btn-default">Register</a>
                             @endif
                         @endauth
                     </div>
