@@ -6,11 +6,9 @@
                     <a href="{{ route('home') }}"><img src="assets/imgs/logo/logo.png" class="" alt="logo"></a>
                 </div>
                 <div class="flex-grow px-20">
-                    <div class="search-style-1">
                         <form action="#" class="w-100">
-                            <input type="text" placeholder="Search for items...">
+                            <x-text-input id="search" name="search" type="text" placeholder="Search for items..." class="mt-1 block w-full" />
                         </form>
-                    </div>
                 </div>
                 <div class="header-action-right">
                     <div class="header-action-2">
