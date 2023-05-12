@@ -887,12 +887,13 @@ button.submit:hover, button[type='submit']:hover {
 .btn, .button {
   display: inline-block;
   border: 1px solid transparent;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   padding: 12px 30px;
   border-radius: 4px;
   color: #fff;
   border: 1px solid #f17612;
+  border-radius: 10rem !important;
   background-color: #f17612;
   cursor: pointer;
   -webkit-transition: all 300ms linear 0s;
