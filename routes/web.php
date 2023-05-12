@@ -20,13 +20,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [Home::class, 'render'])->name('home');
+Route::get('/show/{value}', [Home::class, 'resizePage'])->name('resize.page');
+
 Route::get('/product/{product_id}', [ProductDetails::class, 'render'])->name('product.details');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::post('/add-to-cart', [Cart::class, 'addToCart'])->name('cart.add');
+    Route::post('/inc-qty', [Cart::class, 'incQty'])->name('qty.up');
+    Route::post('/dec-qty', [Cart::class, 'decQty'])->name('qty.down');
+    Route::delete('/destroy-item', [Cart::class, 'destroyItem'])->name('destroy.item');
+    Route::delete('/destroy-cart', [Cart::class, 'destroyCart'])->name('destroy.cart');
     Route::get('/cart', [Cart::class, 'render'])->name('cart');
     Route::get('/checkout', [Checkout::class, 'render'])->name('checkout');
 
@@ -34,6 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'auth.admin'])->group(function () {
     Route::get('/admin/dashboard', [Dashboard::class, 'render'])->name('admin.dashboard');

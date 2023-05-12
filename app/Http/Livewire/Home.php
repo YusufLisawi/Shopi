@@ -9,9 +9,17 @@ use Livewire\WithPagination;
 class Home extends Component
 {
     use WithPagination;
+    public $pageSize = 10;
+
+    public function resizePage($value)
+    {
+        $this->pageSize = $value;
+        $this->resetPage();
+    }
+
     public function render()
     {
-        $products = Product::paginate(12);
-        return view('livewire.home', compact('products'));
+        $products = Product::paginate($this->pageSize);
+        return view('livewire.home', ['products' => $products, 'pageSize' => $this->pageSize]);
     }
 }

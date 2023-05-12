@@ -1,6 +1,12 @@
 <x-app-layout>
     <section class="mt-50 mb-50">
         <div class="container">
+            @if (session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
@@ -15,43 +21,74 @@
                                     <th scope="col">Remove</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="image product-thumbnail"><img
-                                            src="{{ asset('assets/imgs/shop/product-1-2.jpg') }}" alt="#"></td>
-                                    <td class="product-des product-name">
-                                        <h5 class="product-name"><a href="product-details.html">J.Crew Mercantile
-                                                Women's Short-Sleeve</a></h5>
-                                        <p class="font-xs">Maboriosam in a tonto nesciung eget<br> distingy magndapibus.
-                                        </p>
-                                    </td>
-                                    <td class="price" data-title="Price"><span>$65.00 </span></td>
-                                    <td class="text-center" data-title="Stock">
-                                        <div class="detail-qty border radius  m-auto">
-                                            <a href="#" class="qty-down"><i
-                                                    class="fi-rs-angle-small-down"></i></a>
-                                            <span class="qty-val">1</span>
-                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>
-                                    </td>
-                                    <td class="text-right" data-title="Cart">
-                                        <span>$65.00 </span>
-                                    </td>
-                                    <td class="action" data-title="Remove"><a href="#" class="text-muted"><i
-                                                class="fi-rs-trash"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="6" class="text-end">
-                                        <a href="#" class="text-muted"> <i class="fi-rs-cross-small"></i> Clear
-                                            Cart</a>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            @if (Cart::count() > 0)
+                                <tbody>
+                                    @foreach (Cart::content() as $item)
+                                        <tr>
+                                            <td class="image product-thumbnail"><img src="{{ $item->model->image }}"
+                                                    alt="#">
+                                            </td>
+                                            <td class="product-des product-name">
+                                                <h5 class="product-name"><a
+                                                        href="{{ route('product.details', $item->model->id) }}">{{ $item->model->name }}</a>
+                                                </h5>
+                                                <p class="font-xs">
+                                                    {{$item->model->brief_description}}
+                                                </p>
+                                            </td>
+                                            <td class="price" data-title="Price"><span>${{$item->model->price}} </span></td>
+                                            <td class="text-center" data-title="Stock">
+                                                <div class="detail-qty border radius flex items-center justify-between">
+                                                    <span class="qty-val">{{$item->qty}}</span>
+                                                    <div>
+                                                        <form action="{{ route('qty.up') }}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="row_id" value="{{$item->rowId}}">
+                                                            <a class="qty-up" href="" onclick="event.preventDefault(); this.closest('form').submit()">
+                                                                <i class="fi-rs-angle-small-up"></i></a>
+                                                        </form>
+                                                        <form action="{{ route('qty.down') }}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="row_id" value="{{$item->rowId}}">
+                                                            <a class="qty-down" href="" onclick="event.preventDefault(); this.closest('form').submit()">
+                                                                <i class="fi-rs-angle-small-down"></i></a>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-right" data-title="Cart">
+                                                <span>${{$item->subtotal}} </span>
+                                            </td>
+                                            <td class="action" data-title="Remove">
+                                                <form action="{{ route('destroy.item') }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="hidden" name="row_id" value="{{ $item->rowId }}">
+                                                    <a onclick="event.preventDefault(); this.closest('form').submit()" class="text-muted"><i class="fi-rs-trash"></i></a></td>
+                                                </form>
+                                        </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td colspan="6" class="text-end">
+                                                <form action="{{ route('destroy.cart') }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a onclick="event.preventDefault(); this.closest('form').submit()" class="text-muted">
+                                                        <i class="fi-rs-cross-small"></i>
+                                                        Clear Cart</a>
+                                                    </form>
+                                            </td>
+                                        </tr>
+
+                                </tbody>
+                            @else
+                                <h1 class="text-xl font-bold pb-20">No item in cart</h1>
+                            @endif
                         </table>
                     </div>
                     <div class="cart-action text-end">
-                        <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
-                        <a class="btn "><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
+                        <a class="btn mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
+                        <a class="btn " href="{{route('home')}}"><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
                     </div>
                     <div class="divider my-12">
                     </div>
@@ -67,7 +104,7 @@
                                             <tr>
                                                 <td class="cart_total_label">Cart Subtotal</td>
                                                 <td class="cart_total_amount"><span
-                                                        class="font-lg fw-900 text-brand">$240.00</span></td>
+                                                        class="font-lg fw-900 text-brand">${{Cart::subtotal()}}</span></td>
                                             </tr>
                                             <tr>
                                                 <td class="cart_total_label">Shipping</td>
@@ -77,14 +114,15 @@
                                             <tr>
                                                 <td class="cart_total_label">Total</td>
                                                 <td class="cart_total_amount"><strong><span
-                                                            class="font-xl fw-900 text-brand">$240.00</span></strong>
+                                                            class="font-xl fw-900 text-brand">${{Cart::total()}}</span></strong>
                                                 </td>
+
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <a href="{{route('checkout')}}" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Proceed
-                                    To Checkout</a>
+                                <a href="{{ route('checkout') }}" class="btn "> <i class="fi-rs-box-alt mr-10"></i>
+                                    Proceed to Checkout</a>
                             </div>
                         </div>
                     </div>

@@ -90,8 +90,12 @@
                                             <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                         </div>
                                         <div class="product-extra-link2">
-                                            <button type="submit" class="button button-add-to-cart">Add to
-                                                cart</button>
+                                            <form action="{{ route('cart.add') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                <button type="submit" class="button button-add-to-cart">
+                                                    Add to cart</button>
+                                            </form>
                                         </div>
                                     </div>
                                     <ul class="product-meta font-xs color-grey mt-50">

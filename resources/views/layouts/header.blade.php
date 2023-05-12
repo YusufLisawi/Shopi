@@ -3,7 +3,8 @@
         <div class="container">
             <div class="header-wrap flex justify-between items-center">
                 <div class="logo w-[12rem]">
-                    <a href="{{ route('home') }}"><img src="{{ asset('assets/imgs/logo/logo.png')}}" class="" alt="logo"></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('assets/imgs/logo/logo.png') }}" class=""
+                            alt="logo"></a>
                 </div>
                 <div class="flex-grow px-20">
                     <form action="#" class="w-100">
@@ -17,7 +18,9 @@
                             <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                                 <nav class="">
                                     <ul class="">
-                                        <li><h1 class="text-black font-bold text-[1rem]">Hi, {{ Auth::user()->name}}</h1></li>
+                                        <li>
+                                            <h1 class="text-black font-bold text-[1rem]">Hi, {{ Auth::user()->name }}</h1>
+                                        </li>
                                         <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu">
                                                 @if (Auth::user()->type === 'admin')
@@ -41,28 +44,39 @@
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="{{ route('cart') }}">
-                                    <img alt="Yusuf Isawi" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg')}}">
-                                    <span class="pro-count blue">2</span>
+                                    <img alt="Yusuf Isawi" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
+                                    <span class="pro-count blue">{{Cart::count()}}</span>
                                 </a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2 border-gray-200">
                                     <ul>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="product-details.html"><img alt="Yusuf Isawi"
-                                                        src="{{ asset('assets/imgs/shop/thumbnail-3.jpg')}}"></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="product-details.html">Daisy Casual Bag</a></h4>
-                                                <h4><span>1 × </span>$800.00</h4>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
+                                        @foreach (Cart::content() as $item)
+                                            <li>
+                                                <div class="shopping-cart-img">
+                                                    <a href="{{ route('product.details', $item->model->id) }}">
+                                                        <img alt="" src="{{ $item->model->image }}"></a>
+                                                </div>
+                                                <div class="shopping-cart-title">
+                                                    <h4><a
+                                                            href="{{ route('product.details', $item->model->id) }}">
+                                                            {{ $item->model->name }}
+                                                        </a>
+                                                    </h4>
+                                                    <h4><span>{{$item->qty}} × </span>${{$item->model->price}}</h4>
+                                                </div>
+                                                <div class="shopping-cart-delete">
+                                                    <form action="{{ route('destroy.item') }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="hidden" name="row_id" value="{{ $item->rowId }}">
+                                                        <a onclick="event.preventDefault(); this.closest('form').submit()"><i class="fi-rs-cross-small"></i></a>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                     <div class="shopping-cart-footer">
                                         <div class="shopping-cart-total">
-                                            <h4>Total <span>$4000.00</span></h4>
+                                            <h4>Total <span>${{Cart::total()}}</span></h4>
                                         </div>
                                         <div class="shopping-cart-button">
                                             <a href="{{ route('cart') }}" class="btn btn-sm btn-secondary">View cart</a>
