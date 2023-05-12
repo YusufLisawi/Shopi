@@ -111,7 +111,7 @@
                         </ul>
                     </div>
                     <!-- Fillter By Price -->
-                    <div class="sidebar-widget price_range range mb-30 rounded-3xl">
+                    <div class="sidebar-widget price_range range mb-30 rounded-3xl" style="border-radius: 30px">
                         <div class="widget-header position-relative mb-20 pb-10">
                             <h5 class="widget-title mb-10">Fill by price</h5>
                             <div class="bt-1 border-color-1"></div>

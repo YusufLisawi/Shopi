@@ -1,4 +1,4 @@
-<header class="header-area header-style-1 header-height-2">
+<header class="header-area header-style-1 header-height-2 px-20">
     <div class="header-middle d-none d-lg-block py-3">
         <div class="container">
             <div class="header-wrap flex justify-between items-center">
@@ -17,9 +17,12 @@
                             <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                                 <nav class="">
                                     <ul class="">
+                                        <li><h1 class="text-black font-bold text-[1rem]">Hi, {{ Auth::user()->name}}</h1></li>
                                         <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu">
-                                                <li><a href="#">Dashboard</a></li>
+                                                @if (Auth::user()->type === 'admin')
+                                                    <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
+                                                @endif
                                                 <li><a href="#">Orders</a></li>
                                                 <li><a href="{{ route('profile.edit') }}">Account Settings</a></li>
                                                 <li>

@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Home extends Component
 {
-    public function index()
+    public function render()
     {
         return view('livewire.home');
     }

@@ -83,7 +83,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <a href="checkout.html" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Proceed
+                                <a href="{{route('checkout')}}" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Proceed
                                     To Checkout</a>
                             </div>
                         </div>

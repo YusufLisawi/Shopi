@@ -1,7 +1,8 @@
-<footer class="main">
+<div class="divider"></div>
+<footer class="main px-10">
     <section class="section-padding footer-mid">
         <div class="container pt-15 pb-20">
-            <div class="row">
+            <div class="row flex justify-between">
                 <div class="col-lg-4 col-md-6">
                     <div class="widget-about font-md mb-md-5 mb-lg-0">
                         <div class="logo logo-width-1 wow fadeIn animated">
