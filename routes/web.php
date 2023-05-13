@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [Cart::class, 'render'])->name('cart');
     Route::get('/checkout', [Checkout::class, 'render'])->name('checkout');
     Route::post('/checkout-order', [Checkout::class, 'makeOrder'])->name('checkout.order');
+    Route::get('/checkout-success', [Checkout::class, 'success'])->name('checkout.success');
+    Route::get('/checkout-cancel', [Checkout::class, 'cancel'])->name('checkout.cancel');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

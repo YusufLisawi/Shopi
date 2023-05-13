@@ -16,6 +16,7 @@ class Order extends Model
         'state',
         'zipcode',
         'order_notes',
+        'session_id'
     ];
 
     public function user()

@@ -64,7 +64,7 @@
                                             @foreach ($p->categories as $index => $cat)
                                                 <a class=""
                                                     href="/?{{ http_build_query(array_merge(request()->query(), ['category' => $cat->slug])) }}"
-                                                    rel="tag">{{ $index === count($p->categories) - 1 && count($p->categories) > 1 && strlen($cat->name) > 8 ? substr($cat->name, 0, 6) . '...' : $cat->name }}</a>
+                                                    rel="tag">{{ $index === count($p->categories) - 1 && count($p->categories) > 1 && strlen($cat->name) > 15 ? substr($cat->name, 0, 3) . '...' : $cat->name }}</a>
                                                 @if ($index !== count($p->categories) - 1)
                                                     ,
                                                 @endif
@@ -73,12 +73,12 @@
 
                                         </div>
                                         <h2><a href="{{ route('product.details', $p->id) }}"
-                                                class="text-xl">{{ $p->name }}</a></h2>
+                                                class="text-xl">{{ strlen($p->name) > 20 ? substr($p->name, 0, 17) . '...': $p->name }}</a></h2>
                                         <div class="product-price">
                                             <span>${{ $p->price }}</span>
                                             <span class="old-price">${{ $p->old_price }}</span>
                                         </div>
-                                        <div class="show flex justify-center mt-3">
+                                        <div class="show flex justify-end mt-3">
                                             <form action="{{ route('cart.add') }}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{ $p->id }}">
