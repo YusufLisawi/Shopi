@@ -6,8 +6,9 @@
                     <div class="mb-25">
                         <h4 class="font-semibold text-lg text-gray-600">Billing Details</h4>
                     </div>
-                    <form method="post">
-                        <div class="mb-4">
+                    <form method="post" action="{{route('checkout.order')}}" id="checkoutForm">
+                        @csrf
+                        {{-- <div class="mb-4">
                             <x-input-label for="fullname" :value="__('Full name *')" />
                             <x-text-input id="fullname" name="fullname" type="text" class="mt-1 block w-full"
                                 required autofocus autocomplete="fullname" />
@@ -18,23 +19,17 @@
                             <x-text-input id="email" name="email" type="text" class="mt-1 block w-full"
                                 autofocus autocomplete="email" />
                             <x-input-error class="mt-2" :messages="$errors->get('email')" />
-                            </div>
-                            <div class="mb-4">
-                                <x-input-label for="country" :value="__('Country *')" />
-                                @include('livewire.countries-select')
-                                <x-input-error class="mt-2" :messages="$errors->get('country')" />
+                            </div> --}}
+                        <div class="mb-4">
+                            <x-input-label for="country" :value="__('Country *')" />
+                            @include('livewire.countries-select')
+                            <x-input-error class="mt-2" :messages="$errors->get('country')" />
                         </div>
                         <div class="mb-4">
                             <x-input-label for="billing_address" :value="__('Address *')" />
                             <x-text-input id="billing_address" name="billing_address" type="text"
                                 class="mt-1 block w-full" required autofocus autocomplete="billing_address" />
                             <x-input-error class="mt-2" :messages="$errors->get('billing_address')" />
-                        </div>
-                        <div class="mb-4">
-                            <x-input-label for="billing_address2" :value="__('Address line2')" />
-                            <x-text-input id="billing_address2" name="billing_address2" type="text"
-                                class="mt-1 block w-full" autofocus autocomplete="billing_address2" />
-                            <x-input-error class="mt-2" :messages="$errors->get('billing_address2')" />
                         </div>
                         <div class="mb-4">
                             <x-input-label for="city" :value="__('City *')" />
@@ -58,7 +53,7 @@
                             <x-input-label for="country" :value="__('Additional information')" />
                         </div>
                         <div class="form-group mb-30">
-                            <textarea rows="5" placeholder="Order notes"></textarea>
+                            <textarea rows="5" name="notes" placeholder="Order notes such as your phone numbers..."></textarea>
                         </div>
                     </form>
                 </div>
@@ -110,8 +105,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="bt-1 border-color-1 mt-30 mb-30"></div>
-                        <form class="">
+                        {{-- <div class="bt-1 border-color-1 mt-30 mb-30"></div> --}}
+                        {{-- <form class="">
                             <h3 class="my-2 text-lg font-semibold text-gray-600">How would you like to pay?</h3>
                             <ul class="grid w-full gap-6 md:grid-cols-2">
                                 <li>
@@ -146,9 +141,9 @@
                                         </svg>
                                     </label>
                                 </li>
-                                <button type="submit" class="btn btn-block mt-30">Place Order</button>
                             </ul>
-                        </form>
+                        </form> --}}
+                        <button type="submit" class="btn btn-block mt-30" onclick="document.getElementById('checkoutForm').submit();">Place Order</button>
                     </div>
                 </div>
             </div>

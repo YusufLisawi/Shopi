@@ -6,6 +6,7 @@ use App\Http\Livewire\Cart;
 use App\Http\Livewire\Checkout;
 use App\Http\Livewire\Home;
 use App\Http\Livewire\ProductDetails;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/destroy-cart', [Cart::class, 'destroyCart'])->name('destroy.cart');
     Route::get('/cart', [Cart::class, 'render'])->name('cart');
     Route::get('/checkout', [Checkout::class, 'render'])->name('checkout');
+    Route::post('/checkout-order', [Checkout::class, 'makeOrder'])->name('checkout.order');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -18,45 +18,45 @@ models:
         name: string
         description: text
         timestamps: true
-        # products:
-        #     belongsToMany: Product
+        products:
+            belongsToMany: Product
 
-#     Order:
-#         user_id: id:foreign,users
-#         status: enum:pending,processing,completed,canceled
-#         total: decimal:8,2
-#         timestamps: true
-#         user:
-#             belongsTo: User
-#         items:
-#             hasMany: OrderItem
+    Order:
+        user_id: id:foreign,users
+        status: enum:pending,processing,completed,canceled
+        total: decimal:8,2
+        timestamps: true
+        user:
+            belongsTo: User
+        items:
+            hasMany: OrderItem
 
-#     OrderItem:
-#         order_id: id:foreign,orders
-#         product_id: id:foreign,products
-#         quantity: integer
-#         price: decimal:8,2
-#         timestamps: true
-#         order:
-#             belongsTo: Order
-#         product:
-#             belongsTo: Product
+    OrderItem:
+        order_id: id:foreign,orders
+        product_id: id:foreign,products
+        quantity: integer
+        price: decimal:8,2
+        timestamps: true
+        order:
+            belongsTo: Order
+        product:
+            belongsTo: Product
 
-#     User:
-#         name: string
-#         email: string:unique
-#         password: string
-#         is_admin: boolean:default(false)
-#         timestamps: true
-#         orders:
-#             hasMany: Order
+    User:
+        name: string
+        email: string:unique
+        password: string
+        is_admin: boolean:default(false)
+        timestamps: true
+        orders:
+            hasMany: Order
 
-# pivotTables:
-#     category_product:
-#         category_id: id:foreign,categories
-#         product_id: id:foreign,products
+pivotTables:
+    category_product:
+        category_id: id:foreign,categories
+        product_id: id:foreign,products
 
-# seeds:
-#     User: 2
-#     Product: 50
-#     Category: 10
+seeds:
+    User: 2
+    Product: 50
+    Category: 10
