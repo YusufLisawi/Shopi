@@ -64,7 +64,7 @@
                                             @foreach ($p->categories as $index => $cat)
                                                 <a class=""
                                                     href="/?{{ http_build_query(array_merge(request()->query(), ['category' => $cat->slug])) }}"
-                                                    rel="tag">{{ $index === count($p->categories) - 1 && strlen($cat->name) > 5 ? substr($cat->name, 0, 5) . '...' : $cat->name }}</a>
+                                                    rel="tag">{{ $index === count($p->categories) - 1 && count($p->categories) > 1 && strlen($cat->name) > 8 ? substr($cat->name, 0, 6) . '...' : $cat->name }}</a>
                                                 @if ($index !== count($p->categories) - 1)
                                                     ,
                                                 @endif

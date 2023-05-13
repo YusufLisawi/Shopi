@@ -54,7 +54,7 @@ class Home extends Component
         }
 
         // Fetch the paginated products and append the sort and category parameters
-        return $query->paginate(12)->appends(['sort' => $sort, 'category' => $selectedCategory]);
+        return $query->paginate(12)->appends(['sort' => $sort, 'category' => $selectedCategory, 'range' => $priceFilter, 'search' => $search]);
     }
 
 

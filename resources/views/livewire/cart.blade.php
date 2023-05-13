@@ -27,9 +27,9 @@
                                             <td class="image product-thumbnail"><img src="{{ $item->model->image }}"
                                                     alt="#">
                                             </td>
-                                            <td class="product-des product-name">
-                                                <h5 class="product-name"><a
-                                                        href="{{ route('product.details', $item->model->id) }}">{{ $item->model->name }}</a>
+                                            <td class="">
+                                                <h5 class="text-lg font-medium ">
+                                                    <a href="{{ route('product.details', $item->model->id) }}">{{ ucfirst($item->model->name) }}</a>
                                                 </h5>
                                                 <p class="font-xs">
                                                     {{ $item->model->brief_description }}
@@ -38,7 +38,7 @@
                                             <td class="price" data-title="Price"><span>${{ $item->model->price }}
                                                 </span></td>
                                             <td class="text-center" data-title="Stock">
-                                                <div class="detail-qty border radius flex items-center justify-between">
+                                                <div class="border rounded-md px-2 py-1 flex items-center justify-between">
                                                     <span class="qty-val">{{ $item->qty }}</span>
                                                     <div>
                                                         <form action="{{ route('qty.up') }}" method="post">
@@ -94,17 +94,17 @@
                         </table>
                     </div>
                     <div class="cart-action text-end">
-                        <a class="btn mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
                         <a class="btn " href="{{ route('home') }}"><i class="fi-rs-shopping-bag mr-10"></i>Continue
                             Shopping</a>
                     </div>
+                    @if (Cart::count() > 0)
                     <div class="divider my-12">
                     </div>
-                    <div class="row mb-50">
+                    <div class="flex justify-center mb-50">
                         <div class="col-lg-6 col-md-12">
-                            <div class="border p-md-4 p-30 border-radius cart-totals">
-                                <div class="heading_s1 mb-3">
-                                    <h4>Cart Totals</h4>
+                            <div class="border p-md-4 p-30 rounded-xl cart-totals">
+                                <div class="mb-3">
+                                    <h1 class="text-lg font-semibold">Cart Totals</h1>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table">
@@ -141,12 +141,13 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <a href="{{ route('checkout') }}" class="btn "> <i class="fi-rs-box-alt mr-10"></i>
+                                <a href="{{ route('checkout') }}" class="btn"> <i class="fi-rs-box-alt mr-10"></i>
                                     Proceed to Checkout</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </section>

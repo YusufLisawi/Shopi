@@ -1,7 +1,7 @@
 <div class="form-row">
     <div class="form-group col-lg-12">
         <div class="custom_select">
-            <select class="form-control select-active">
+            <select class="form-control select-active" name="country">
                 <option value="">Choose a option...</option>
                 <option value="AX">Aland Islands</option>
                 <option value="AF">Afghanistan</option>
