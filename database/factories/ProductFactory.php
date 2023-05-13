@@ -27,7 +27,6 @@ class ProductFactory extends Factory
             'quantity' => $this->faker->numberBetween(1, 100),
             'image' => $this->faker->imageUrl(),
             'images' => json_encode([$this->faker->imageUrl(), $this->faker->imageUrl()]),
-            'category_id' => $this->faker->numberBetween(1, 6),
         ];
     }
 }

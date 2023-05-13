@@ -1,0 +1,11 @@
+created:
+    - database/factories/ProductFactory.php
+    - database/factories/CategoryFactory.php
+    - database/migrations/2023_05_13_125747_create_products_table.php
+    - database/migrations/2023_05_13_125748_create_categories_table.php
+    - app/Models/Product.php
+    - app/Models/Category.php
+models:
+    Category: { name: string, description: text, timestamps: timestamps }
+    Product: { name: string, brief_description: string, description: text, price: decimal, old_price: decimal, SKU: string, stock_status: 'enum:instock,outstock', quantity: 'integer:default(10)', image: string, images: text, timestamps: timestamps }
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, type: 'string default:customer', remember_token: 'string:100 nullable' }

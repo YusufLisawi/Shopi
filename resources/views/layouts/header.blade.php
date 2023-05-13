@@ -3,13 +3,11 @@
         <div class="container">
             <div class="header-wrap flex justify-between items-center">
                 <div class="logo w-[12rem]">
-                    <a href="{{ route('home') }}"><img src="{{ asset('assets/imgs/logo/logo.png') }}" class=""
-                            alt="logo"></a>
+                    <x-application-logo></x-application-logo>
                 </div>
-                <div class="flex-grow px-20">
+                <div class="search-style-1 flex-grow px-20">
                     <form action="#" class="w-100">
-                        <x-text-input id="search" name="search" type="text" placeholder="Search for items..."
-                            class="mt-1 block w-full" />
+                        <input id="search" name="search" type="text" placeholder="Search for any product, category, brand..."/>
                     </form>
                 </div>
                 <div class="header-action-right">
@@ -23,8 +21,8 @@
                                         </li>
                                         <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu">
-                                                @if (Auth::user()->type === 'admin')
-                                                    <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
+                                                @if (Auth::user()->is_admin)
+                                                    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                                                 @endif
                                                 <li><a href="#">Orders</a></li>
                                                 <li><a href="{{ route('profile.edit') }}">Account Settings</a></li>

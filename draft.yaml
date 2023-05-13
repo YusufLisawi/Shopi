@@ -1,0 +1,62 @@
+models:
+    Product:
+        name: string
+        brief_description: string
+        description: text
+        price: decimal
+        old_price: decimal
+        SKU: string
+        stock_status: enum:instock,outstock
+        quantity: integer:default(10)
+        image: string
+        images: text
+        timestamps: true
+        categories:
+            belongsToMany: Category
+
+    Category:
+        name: string
+        description: text
+        timestamps: true
+        # products:
+        #     belongsToMany: Product
+
+#     Order:
+#         user_id: id:foreign,users
+#         status: enum:pending,processing,completed,canceled
+#         total: decimal:8,2
+#         timestamps: true
+#         user:
+#             belongsTo: User
+#         items:
+#             hasMany: OrderItem
+
+#     OrderItem:
+#         order_id: id:foreign,orders
+#         product_id: id:foreign,products
+#         quantity: integer
+#         price: decimal:8,2
+#         timestamps: true
+#         order:
+#             belongsTo: Order
+#         product:
+#             belongsTo: Product
+
+#     User:
+#         name: string
+#         email: string:unique
+#         password: string
+#         is_admin: boolean:default(false)
+#         timestamps: true
+#         orders:
+#             hasMany: Order
+
+# pivotTables:
+#     category_product:
+#         category_id: id:foreign,categories
+#         product_id: id:foreign,products
+
+# seeds:
+#     User: 2
+#     Product: 50
+#     Category: 10

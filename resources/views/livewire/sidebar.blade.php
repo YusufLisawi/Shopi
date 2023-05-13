@@ -3,7 +3,7 @@
         <div class="col-lg-12 col-mg-6"></div>
         <div class="col-lg-12 col-mg-6"></div>
     </div>
-    <div class="widget-category mb-30 rounded-3xl">
+    <div class="widget-category mb-30 rounded-3xl border-slate-100 shadow-2xl">
         <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
         <ul class="categories">
             <li><a href="shop.html">Shoes & Bags</a></li>
@@ -16,7 +16,7 @@
         </ul>
     </div>
     <!-- Fillter By Price -->
-    <div class="sidebar-widget price_range range mb-30 rounded-3xl" style="border-radius: 30px">
+    <div class="sidebar-widget price_range range mb-30 rounded-3xl border-0 shadow-2xl" style="border-radius: 30px">
         <div class="widget-header position-relative mb-20 pb-10">
             <h5 class="widget-title mb-10">Fill by price</h5>
             <div class="bt-1 border-color-1"></div>

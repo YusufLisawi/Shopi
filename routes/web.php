@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [Home::class, 'render'])->name('home');
-Route::get('/show/{value}', [Home::class, 'resizePage'])->name('resize.page');
 
 Route::get('/product/{product_id}', [ProductDetails::class, 'render'])->name('product.details');
 

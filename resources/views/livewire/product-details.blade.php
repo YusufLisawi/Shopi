@@ -100,8 +100,11 @@
                                     </div>
                                     <ul class="product-meta font-xs color-grey mt-50">
                                         <li class="mb-5"><a href="#">{{ $product->SKU }}</a></li>
-                                        <li class="mb-5">Tags: <a href="#"
-                                                rel="tag">{{ $product->category->name }}</a></li>
+                                        <li class="mb-5">Tags:
+                                            @foreach ($product->categoryNames as $cat)
+                                                <a href="#" rel="tag">{{ $cat }}</a>,
+                                            @endforeach
+                                        </li>
                                         <li>Availability:
                                             @if ($product->stock_status === 'instock')
                                                 <span class="in-stock text-success ml-5">{{ $product->quantity }}

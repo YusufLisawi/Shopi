@@ -16,7 +16,7 @@ class AuthAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->type === 'admin')
+        if (Auth::user()->is_admin)
             return $next($request);
         else {
             session()->flash('error', 'You are not authorized to access this page.');
