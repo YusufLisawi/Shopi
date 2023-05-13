@@ -6,7 +6,7 @@
                     <x-application-logo></x-application-logo>
                 </div>
                 <div class="search-style-1 flex-grow px-20">
-                    <form action="#" class="w-100">
+                    <form action="{{ route('home') }}" class="w-100">
                         <input id="search" name="search" type="text" placeholder="Search for any product, category, brand..."/>
                     </form>
                 </div>
@@ -56,7 +56,7 @@
                                                 <div class="shopping-cart-title">
                                                     <h4><a
                                                             href="{{ route('product.details', $item->model->id) }}">
-                                                            {{ $item->model->name }}
+                                                            {{ strlen($item->model->name) > 15 ? substr($item->model->name, 0, 15) . '...' : $item->model->name }}
                                                         </a>
                                                     </h4>
                                                     <h4><span>{{$item->qty}} × </span>${{$item->model->price}}</h4>

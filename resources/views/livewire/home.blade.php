@@ -5,7 +5,7 @@
                 <div class="col-lg-9">
                     <div class="shop-product-fillter">
                         <div class="totall-product">
-                            <p> We found <strong class="text-brand">{{$products->total()}}</strong> items for you!</p>
+                            <p> We found <strong class="text-brand">{{ $products->total() }}</strong> items for you!</p>
                         </div>
                         <div class="sort-by-product-area">
                             <div class="sort-by-cover">
@@ -24,15 +24,22 @@
                                             @else
                                                 Default Sorting
                                             @endif
-                                            <i class="fi-rs-angle-small-down"></i></span>
+                                            <i class="fi-rs-angle-small-down"></i>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="sort-by-dropdown">
                                     <ul>
-                                        <li><a class="{{ $sort === 'latest' ? 'active' : '' }}" href="{{ url()->current() }}?sort=latest">Latest: New Released</a></li>
-                                        <li><a class="{{ $sort === 'low-to-high' ? 'active' : '' }}" href="{{ url()->current() }}?sort=low-to-high">Price: Low to High</a></li>
-                                        <li><a class="{{ $sort === 'high-to-low' ? 'active' : '' }}" href="{{ url()->current() }}?sort=high-to-low">Price: High to Low</a></li>
-                                        <li><a href="{{route('home')}}">Default Sorting</a></li>
+                                        <li><a class="{{ $sort === 'latest' ? 'active' : '' }}"
+                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'latest'])) }}">Latest:
+                                                New Released</a></li>
+                                        <li><a class="{{ $sort === 'low-to-high' ? 'active' : '' }}"
+                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'low-to-high'])) }}">Price:
+                                                Low to High</a></li>
+                                        <li><a class="{{ $sort === 'high-to-low' ? 'active' : '' }}"
+                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'high-to-low'])) }}">Price:
+                                                High to Low</a></li>
+                                        <li><a href="{{ route('home') }}">Default Sorting</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -53,7 +60,20 @@
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
-                                        <h2><a href="{{route('product.details', $p->id)}}" class="text-xl">{{ $p->name }}</a></h2>
+                                        <div class="product-category">
+                                            @foreach ($p->categories as $index => $cat)
+                                                <a class=""
+                                                    href="/?{{ http_build_query(array_merge(request()->query(), ['category' => $cat->slug])) }}"
+                                                    rel="tag">{{ $index === count($p->categories) - 1 && strlen($cat->name) > 5 ? substr($cat->name, 0, 5) . '...' : $cat->name }}</a>
+                                                @if ($index !== count($p->categories) - 1)
+                                                    ,
+                                                @endif
+                                            @endforeach
+
+
+                                        </div>
+                                        <h2><a href="{{ route('product.details', $p->id) }}"
+                                                class="text-xl">{{ $p->name }}</a></h2>
                                         <div class="product-price">
                                             <span>${{ $p->price }}</span>
                                             <span class="old-price">${{ $p->old_price }}</span>
@@ -74,7 +94,7 @@
                         @endforeach
                     </div>
                     <!--pagination-->
-                    {{$products->links('pagination::tailwind')}}
+                    {{ $products->links('pagination::tailwind') }}
                 </div>
                 @include('livewire.sidebar')
             </div>

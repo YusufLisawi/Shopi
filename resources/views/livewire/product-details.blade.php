@@ -11,19 +11,17 @@
                                     <!-- MAIN SLIDES -->
                                     <div class="product-image-slider">
                                         @foreach ($product->images as $img)
-                                        <figure class="border-radius-10">
-                                            <img src="{{ $img }}"
-                                                alt="product image">
-                                        </figure>
+                                            <figure class="border-radius-10">
+                                                <img src="{{ $img }}" alt="product image">
+                                            </figure>
                                         @endforeach
                                     </div>
                                     <!-- THUMBNAILS -->
                                     <div class="slider-nav-thumbnails pl-15 pr-15">
                                         @foreach ($product->images as $img)
-                                        <div class="border-radius-10">
-                                            <img src="{{ $img }}"
-                                                alt="product image">
-                                        </div>
+                                            <div class="border-radius-10">
+                                                <img src="{{ $img }}" alt="product image">
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -101,8 +99,12 @@
                                     <ul class="product-meta font-xs color-grey mt-50">
                                         <li class="mb-5"><a href="#">{{ $product->SKU }}</a></li>
                                         <li class="mb-5">Tags:
-                                            @foreach ($product->categoryNames as $cat)
-                                                <a href="#" rel="tag">{{ $cat }}</a>,
+                                            @foreach ($product->categories as $index => $cat)
+                                                <a href="/?{{ http_build_query(array_merge(request()->query(), ['category' => $cat->slug])) }}"
+                                                    el="tag">{{ $cat->name }}</a>
+                                                @if ($index !== count($product->categories) - 1)
+                                                    ,
+                                                @endif
                                             @endforeach
                                         </li>
                                         <li>Availability:
