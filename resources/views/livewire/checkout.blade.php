@@ -8,18 +8,6 @@
                     </div>
                     <form method="post" action="{{route('checkout.order')}}" id="checkoutForm">
                         @csrf
-                        {{-- <div class="mb-4">
-                            <x-input-label for="fullname" :value="__('Full name *')" />
-                            <x-text-input id="fullname" name="fullname" type="text" class="mt-1 block w-full"
-                                required autofocus autocomplete="fullname" />
-                            <x-input-error class="mt-2" :messages="$errors->get('fullname')" />
-                        </div>
-                        <div class="mb-4">
-                            <x-input-label for="email" :value="__('Email address *')" />
-                            <x-text-input id="email" name="email" type="text" class="mt-1 block w-full"
-                                autofocus autocomplete="email" />
-                            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-                            </div> --}}
                         <div class="mb-4">
                             <x-input-label for="country" :value="__('Country *')" />
                             @include('livewire.countries-select')
@@ -28,32 +16,37 @@
                         <div class="mb-4">
                             <x-input-label for="billing_address" :value="__('Address *')" />
                             <x-text-input id="billing_address" name="billing_address" type="text"
-                                class="mt-1 block w-full" required autofocus autocomplete="billing_address" />
+                                class="mt-1 block w-full" value="{{$billingDetails ? $billingDetails->billing_address : ''}}" required autofocus autocomplete="billing_address" />
                             <x-input-error class="mt-2" :messages="$errors->get('billing_address')" />
                         </div>
                         <div class="mb-4">
                             <x-input-label for="city" :value="__('City *')" />
                             <x-text-input id="city" name="city" type="text" class="mt-1 block w-full"
-                                autofocus autocomplete="city" />
+                                autofocus autocomplete="city" value="{{$billingDetails ? $billingDetails->city : ''}}"/>
                             <x-input-error class="mt-2" :messages="$errors->get('city')" />
                         </div>
                         <div class="mb-4">
                             <x-input-label for="state" :value="__('State / County *')" />
                             <x-text-input id="state" name="state" type="text" class="mt-1 block w-full"
-                                autofocus autocomplete="state" />
+                                autofocus autocomplete="state" value="{{$billingDetails ? $billingDetails->state : ''}}"/>
                             <x-input-error class="mt-2" :messages="$errors->get('state')" />
                         </div>
                         <div class="mb-4">
                             <x-input-label for="zipcode" :value="__('Postcode / ZIP *')" />
                             <x-text-input id="zipcode" name="zipcode" type="text" class="mt-1 block w-full"
-                                autofocus autocomplete="zipcode" />
+                                autofocus autocomplete="zipcode" value="{{$billingDetails ? $billingDetails->zipcode : ''}}"/>
                             <x-input-error class="mt-2" :messages="$errors->get('zipcode')" />
                         </div>
-                        <div class="mb-20">
-                            <x-input-label for="country" :value="__('Additional information')" />
+                        <div class="mb-4">
+                            <x-input-label for="phone" :value="__('Phone number *')" />
+                            <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full"
+                                autofocus autocomplete="phone" value="{{$billingDetails ? $billingDetails->phone : ''}}"/>
+                            <x-input-error class="mt-2" :messages="$errors->get('phone')" />
                         </div>
                         <div class="form-group mb-30">
-                            <textarea rows="5" name="notes" placeholder="Order notes such as your phone numbers..."></textarea>
+                            <x-input-label for="order_notes" :value="__('Additional information')" />
+                            <x-text-input id="order_notes" name="order_notes" type="text" class="mt-1 block w-full"
+                                autofocus autocomplete="order_notes" placeholder="Any notes?" value="{{$billingDetails ? $billingDetails->order_notes : ''}}"/>
                         </div>
                     </form>
                 </div>

@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class Checkout extends Component
 {
 
-    public function stripeCheckout($details)
+    public function stripeCheckout()
     {
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
         $lineItems = [];
@@ -37,27 +37,22 @@ class Checkout extends Component
             'cancel_url' => route('checkout.cancel'),
         ]);
 
-
+        $total = str_replace(',', '', Cart::total());
         $order = new Order([
             'user_id' => Auth::user()->id,
             'status' => 'pending',
-            'total' => Cart::total(),
-            'country' => $details['country'],
-            'billing_address' => $details['billing_address'],
-            'city' => $details['city'],
-            'state' => $details['state'],
-            'zipcode' => $details['zipcode'],
-            'order_notes' => $details['notes'] ?? null,
+            'total' => $total,
             'session_id' => $checkout_session->id,
         ]);
         $order->save();
 
         foreach (Cart::content() as $item) {
+            $price = str_replace(',', '', $item->price);
             $orderItem = new OrderItem([
                 'order_id' => $order->id,
                 'product_id' => $item->model->id,
                 'quantity' => $item->qty,
-                'price' => $item->price
+                'price' => $price
             ]);
             $orderItem->save();
         }
@@ -102,9 +97,16 @@ class Checkout extends Component
             'billing_address' => 'required',
             'city' => 'required',
             'state' => 'required',
+            'phone' => 'required',
             'zipcode' => 'required|numeric',
+            'order_notes' => '',
         ]);
-        $sessionUrl = $this->stripeCheckout($validatedRequest);
+
+        $user = Auth::user();
+        if ($user->billingDetails === null) {
+            $user->billingDetails()->create($validatedRequest);
+        }
+        $sessionUrl = $this->stripeCheckout();
 
         return redirect($sessionUrl);
     }
@@ -115,6 +117,8 @@ class Checkout extends Component
             session()->flash('error', 'Your cart is empty.');
             return redirect()->route('home');
         }
-        return view('livewire.checkout');
+        $user = Auth::user();
+        $billingDetails = $user->billingDetails;
+        return view('livewire.checkout', compact('billingDetails'));
     }
 }
