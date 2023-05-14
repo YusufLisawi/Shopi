@@ -42,11 +42,11 @@ class OrderReceived extends Mailable
 
     public function attachments(): array
     {
-        $this->invoice->save('public');
-        $localPath = storage_path('app/public/' . 'Shopi-'.$this->order->user->name .'#'.$this->order->id . '.pdf');
+        $filename = 'Shopi-'.$this->order->user->name ;
+        $localPath = storage_path('app/public/' . $filename . '.pdf');
         return [
-            Attachment::fromPath($localPath, 'invoice_Shopi-'.$this->order->user->name .'#'.$this->order->id . '.pdf')
-                ->as('invoice_Shopi-'.$this->order->user->name .'#'.$this->order->id .'.pdf')
+            Attachment::fromPath($localPath, 'Invoice-'.$filename.'#'.$this->order->id.'.pdf')
+                ->as('Invoice-'.$filename.'#'.$this->order->id.'.pdf')
                 ->withMime('application/pdf'),
         ];
     }

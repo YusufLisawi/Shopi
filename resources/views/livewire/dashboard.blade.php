@@ -45,12 +45,13 @@
                         <td class="px-4 py-2">{{ $order->created_at->format('F j, Y') }}</td>
                         <td class="px-4 py-2">{{ $quantity }}</td>
                         <td class="px-4 py-2">
-                            <a href="{{route('invoice', $order)}}" class="bg-orange-500 text-white px-4 py-2 font-semibold rounded-full">View
-                                Details</a>
+                            <a href="{{route('invoice', $order)}}" class="bg-orange-500 text-white px-4 py-2 font-semibold rounded-full">
+                                View Details</a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        {{ $orders->links() }}
     </div>
 </x-app-layout>

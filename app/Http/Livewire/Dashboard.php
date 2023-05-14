@@ -25,8 +25,10 @@ class Dashboard extends Component
 
         $orders = Order::with('orderItems')
             ->where('user_id', $user->id)
-            ->get();
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         return view('livewire.dashboard', compact('orders'));
     }
+
 }
