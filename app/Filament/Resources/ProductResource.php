@@ -33,10 +33,12 @@ class ProductResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('price')
                     ->numeric()
+                    ->prefix('$')
                     ->rules(['min:0'])
                     ->required(),
                 Forms\Components\TextInput::make('old_price')
                     ->numeric()
+                    ->prefix('$')
                     ->rules(['min:0'])
                     ->required(),
                 Forms\Components\TextInput::make('quantity')->numeric(),
@@ -76,13 +78,13 @@ class ProductResource extends Resource
                     ->image()
                     ->imageResizeMode('cover')
                     ->imageCropAspectRatio('1:1')
-                    ->imageResizeTargetWidth('400')
-                    ->imageResizeTargetHeight('400')
+                    ->imageResizeTargetWidth('450')
+                    ->imageResizeTargetHeight('450')
                     ->required(),
                 Forms\Components\RichEditor::make('description')
                     ->maxLength(1000)
+                    ->columnSpan('full')
                     ->toolbarButtons([
-                        'attachFiles',
                         'blockquote',
                         'bold',
                         'bulletList',
@@ -105,9 +107,9 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\TextColumn::make('name')->sortable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('SKU')->sortable(),
-                Tables\Columns\TextColumn::make('price')->sortable(),
+                Tables\Columns\TextColumn::make('price')->prefix('$')->sortable(),
                 Tables\Columns\TextColumn::make('quantity')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->sortable()->date('M d H:i'),
                 Tables\Columns\TextColumn::make('updated_at')->sortable()->date('M d H:i'),
