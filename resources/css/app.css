@@ -2,3 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.default-sizes h1 {
+    font-size: xx-large !important;
+}
+.default-sizes h2 {
+    font-size: x-large !important;
+}
+.default-sizes h3 {
+    font-size: large !important;
+}
+.default-sizes p {
+    font-size: initial !important;
+}
+.default-sizes blockquote {
+    font-size: initial !important;
+}

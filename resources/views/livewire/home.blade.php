@@ -52,10 +52,10 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="{{ route('product.details', $p->id) }}">
-                                                <img class="default-img" src="{{ json_decode($p->images)[0] }}"
-                                                    alt="">
-                                                <img class="hover-img" src="{{ json_decode($p->images)[1] }}"
-                                                    alt="">
+                                                <img class="default-img" src="{{  asset('storage/'.$p->image) }}"
+                                                    alt="{{$p->name}}">
+                                                {{-- <img class="hover-img" src="{{ json_decode($p->images)[1] }}"
+                                                    alt=""> --}}
                                             </a>
                                         </div>
                                     </div>

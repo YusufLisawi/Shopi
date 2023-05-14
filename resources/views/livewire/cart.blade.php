@@ -24,8 +24,10 @@
                                 <tbody>
                                     @foreach (Cart::content() as $item)
                                         <tr>
-                                            <td class="image product-thumbnail"><img src="{{ $item->model->image }}"
-                                                    alt="#">
+                                            <td class="product-thumbnail ">
+                                                <a class="rounded-lg" href="{{ route('product.details', $item->model->id) }}">
+                                                <img  src="{{ asset('storage/'.$item->model->image) }}"
+                                                    alt="{{$item->model->name}}"></a>
                                             </td>
                                             <td class="">
                                                 <h5 class="text-lg font-medium ">

@@ -12,7 +12,7 @@
                                     <div class="product-image-slider">
                                         @foreach ($product->images as $img)
                                             <figure class="border-radius-10">
-                                                <img src="{{ $img }}" alt="product image">
+                                                <img src="{{ asset('storage/'.$img) }}" alt="product image">
                                             </figure>
                                         @endforeach
                                     </div>
@@ -20,7 +20,7 @@
                                     <div class="slider-nav-thumbnails pl-15 pr-15">
                                         @foreach ($product->images as $img)
                                             <div class="border-radius-10">
-                                                <img src="{{ $img }}" alt="product image">
+                                                <img src="{{ asset('storage/'.$img) }}" alt="product image">
                                             </div>
                                         @endforeach
                                     </div>
@@ -94,8 +94,8 @@
                             </ul>
                             <div class="tab-content shop_info_tab entry-main-content">
                                 <div class="tab-pane fade show active" id="Description">
-                                    <div class="">
-                                        <p>{{ $product->description }}</p>
+                                    <div class="default-sizes">
+                                        {!!$product->description!!}
                                     </div>
                                 </div>
                             </div>

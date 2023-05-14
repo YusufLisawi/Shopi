@@ -51,7 +51,7 @@
                                             <li>
                                                 <div class="shopping-cart-img">
                                                     <a href="{{ route('product.details', $item->model->id) }}">
-                                                        <img alt="" src="{{ $item->model->image }}"></a>
+                                                        <img alt="" src="{{ asset('storage/'.$item->model->image) }}"></a>
                                                 </div>
                                                 <div class="shopping-cart-title">
                                                     <h4><a

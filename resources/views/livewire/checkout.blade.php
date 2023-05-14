@@ -66,7 +66,7 @@
                                 <tbody>
                                     @foreach (Cart::content() as $i)
                                         <tr>
-                                            <td class="image product-thumbnail"><img src="{{ $i->model->image }}"
+                                            <td class="image product-thumbnail"><img src="{{ asset('storage/'.$i->model->image) }}"
                                                     alt="#">
                                             </td>
                                             <td>
