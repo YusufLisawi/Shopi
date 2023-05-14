@@ -59,6 +59,6 @@ class InvoiceService {
         // Then send email to party with link
 
         // And return invoice itself to browser or have a different view
-        return $invoice->stream();
+        return $invoice;
     }
 }

@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\OrderReceived;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Services\InvoiceService;
 use Livewire\Component;
 use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Checkout extends Component
@@ -60,7 +63,7 @@ class Checkout extends Component
         return $checkout_session->url;
     }
 
-    public function success(Request $request)
+    public function success(Request $request, InvoiceService $invoiceService)
     {
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
         $sessionId = $request->get('session_id');
@@ -76,6 +79,7 @@ class Checkout extends Component
                 $order->status = 'processing';
                 $order->save();
             }
+            Mail::to($order->user->email)->send(new OrderReceived($order, $invoiceService->createInvoice($order)));
             Cart::destroy();
             return view('livewire.success', compact('customer'));
         } catch (\Exception $e) {
@@ -108,7 +112,9 @@ class Checkout extends Component
         } else {
             $user->billingDetails()->update($validatedRequest);
         }
+
         $sessionUrl = $this->stripeCheckout();
+
 
         return redirect($sessionUrl);
     }

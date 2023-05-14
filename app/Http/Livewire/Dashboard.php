@@ -3,11 +3,17 @@
 namespace App\Http\Livewire;
 
 use App\Models\Order;
+use App\Services\InvoiceService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Dashboard extends Component
 {
+    public function invoicePdf(Order $order, InvoiceService $invoiceService)
+    {
+        return $invoiceService->createInvoice($order)->stream();
+    }
+
     public function invoice(Order $order)
     {
         return view('livewire.invoice', compact('order'));
