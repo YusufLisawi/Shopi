@@ -105,6 +105,8 @@ class Checkout extends Component
         $user = Auth::user();
         if ($user->billingDetails === null) {
             $user->billingDetails()->create($validatedRequest);
+        } else {
+            $user->billingDetails()->update($validatedRequest);
         }
         $sessionUrl = $this->stripeCheckout();
 

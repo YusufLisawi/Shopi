@@ -22,7 +22,9 @@
                                         <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu">
                                                 @if (Auth::user()->is_admin)
-                                                    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                                                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                                                    @else
+                                                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                                                 @endif
                                                 <li><a href="#">Orders</a></li>
                                                 <li><a href="{{ route('profile.edit') }}">Account Settings</a></li>
