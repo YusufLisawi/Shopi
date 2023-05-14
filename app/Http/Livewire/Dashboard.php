@@ -8,6 +8,11 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
+    public function invoice(Order $order)
+    {
+        return view('livewire.invoice', compact('order'));
+    }
+
     public function render()
     {
         $user = Auth::user();

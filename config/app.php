@@ -184,6 +184,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Cart' => \Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Invoice' => LaravelDaily\Invoices\Facades\Invoice::class
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 

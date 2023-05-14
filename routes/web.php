@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Cart;
 use App\Http\Livewire\Checkout;
@@ -36,11 +37,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout-order', [Checkout::class, 'makeOrder'])->name('checkout.order');
     Route::get('/checkout-success', [Checkout::class, 'success'])->name('checkout.success');
     Route::get('/checkout-cancel', [Checkout::class, 'cancel'])->name('checkout.cancel');
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/dashboard/invoice/{order}', [Dashboard::class, 'invoice'])->name('invoice');
+    Route::get('/dashboard/invoice/pdf/{order}', [InvoiceController::class, 'index'])->name('invoice.pdf');
     Route::get('/dashboard', [Dashboard::class, 'render'])->name('dashboard');
 });
 
