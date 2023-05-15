@@ -54,8 +54,6 @@
                                             <a href="{{ route('product.details', $p->id) }}">
                                                 <img class="default-img" src="{{  asset('storage/'.$p->image) }}"
                                                     alt="{{$p->name}}">
-                                                {{-- <img class="hover-img" src="{{ json_decode($p->images)[1] }}"
-                                                    alt=""> --}}
                                             </a>
                                         </div>
                                     </div>
@@ -72,8 +70,12 @@
 
 
                                         </div>
-                                        <h2><a href="{{ route('product.details', $p->id) }}"
-                                                class="text-xl">{{ strlen($p->name) > 20 ? substr($p->name, 0, 17) . '...': $p->name }}</a></h2>
+                                        <h2>
+                                            <a href="{{ route('product.details', $p->id) }}"
+                                                class="text-xl">
+                                                {{ strlen($p->name) > 20 ? substr($p->name, 0, 17) . '...': $p->name }}
+                                            </a>
+                                        </h2>
                                         <div class="product-price">
                                             <span>${{ $p->price }}</span>
                                             <span class="old-price">${{ $p->old_price }}</span>

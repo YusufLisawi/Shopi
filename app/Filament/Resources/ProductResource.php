@@ -2,18 +2,33 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\RelationManagers\CategoriesRelationManager;
-use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
-use App\Models\Product;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Models\Product;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use Livewire\TemporaryUploadedFile;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\CheckboxList;
+use Filament\Tables\Actions\DeleteBulkAction;
+use App\Filament\Resources\ProductResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Filament\Resources\ProductResource\Pages\EditProduct;
+use App\Filament\Resources\ProductResource\Pages\ListProducts;
+use App\Filament\Resources\ProductResource\Pages\CreateProduct;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
+use App\Filament\Resources\CategoryResource\RelationManagers\CategoriesRelationManager;
 
 class ProductResource extends Resource
 {
@@ -50,9 +65,6 @@ class ProductResource extends Resource
                     'outstock' => 'Out of Stock',
                 ])
                     ->default('instock'),
-                Forms\Components\Select::make('categories')
-                    ->multiple()
-                    ->relationship('categories', 'name'),
                 Forms\Components\FileUpload::make('image')
                     ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
                         $fileName = $file->hashName();
@@ -64,8 +76,8 @@ class ProductResource extends Resource
                     ->image()
                     ->imageResizeMode('cover')
                     ->imageCropAspectRatio('1:1')
-                    ->imageResizeTargetWidth('400')
-                    ->imageResizeTargetHeight('400')
+                    ->imageResizeTargetWidth('450')
+                    ->imageResizeTargetHeight('450')
                     ->required(),
                 Forms\Components\FileUpload::make('images')
                     ->getUploadedFileNameForStorageUsing(function (TemporaryUploadedFile $file): string {
@@ -73,6 +85,7 @@ class ProductResource extends Resource
                         $name = explode('.', $fileName);
                         return (string) str('images/products/alt_images/' . $name[0] . '.' . $name[1]);
                     })
+                    ->columnSpan('full')
                     ->label('Alternate Images')
                     ->maxSize(3072)
                     ->image()
@@ -98,6 +111,9 @@ class ProductResource extends Resource
                         'strike',
                         'undo',
                     ]),
+                Forms\Components\CheckboxList::make('categories')
+                    ->columnSpan('full')
+                    ->relationship('categories', 'name'),
 
             ]);
     }
@@ -105,10 +121,13 @@ class ProductResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                FilamentExportHeaderAction::make('export')
+            ])
             ->columns([
                 Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('SKU')->sortable(),
+                Tables\Columns\TextColumn::make('SKU')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('price')->prefix('$')->sortable(),
                 Tables\Columns\TextColumn::make('quantity')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->sortable()->date('M d H:i'),
@@ -123,6 +142,7 @@ class ProductResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+                FilamentExportBulkAction::make('export'),
             ]);
     }
 

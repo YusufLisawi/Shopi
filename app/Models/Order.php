@@ -13,12 +13,7 @@ class Order extends Model
 
     protected $fillable = [
         'user_id', 'status', 'total', 'country',
-        'billing_address',
-        'city',
-        'state',
-        'zipcode',
-        'order_notes',
-        'session_id'
+        'session_id',
     ];
 
     public function user()
@@ -27,7 +22,7 @@ class Order extends Model
     }
 
     protected $dispatchesEvents = [
-        'updated' => OrderCompletedListener::class,
+        'saved' => OrderCompletedListener::class,
     ];
 
     public function orderItems()

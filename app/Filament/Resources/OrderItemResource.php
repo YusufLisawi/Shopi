@@ -2,16 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\OrderItemResource\Pages;
-use App\Filament\Resources\OrderItemResource\RelationManagers;
-use App\Models\OrderItem;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\OrderItem;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\OrderItemResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\OrderItemResource\RelationManagers;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
 
 class OrderItemResource extends Resource
 {
@@ -23,8 +25,27 @@ class OrderItemResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('product_id')
-                    ->relationship('product', 'name')
+                Forms\Components\Fieldset::make('product_id')
+                    ->label('Product information')
+                    ->relationship('product')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')->disabled(),
+                        Forms\Components\TextInput::make('SKU')->disabled(),
+                        Forms\Components\TextInput::make('quantity')->disabled(),
+                        Forms\Components\TextInput::make('price')->prefix('$')->disabled(),
+                    ]),
+                Forms\Components\Fieldset::make('order_id')
+                    ->relationship('order')
+                    ->label('Information about the order')
+                    ->schema([
+                        Forms\Components\Fieldset::make('user_id')
+                            ->label('Buyer information')
+                            ->relationship('user')
+                            ->schema([
+                                Forms\Components\TextInput::make('name')->disabled(),
+                                Forms\Components\TextInput::make('email')->disabled(),
+                            ]),
+                    ])
                     ->disabled(),
             ]);
     }
@@ -32,7 +53,7 @@ class OrderItemResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
+            ->columns([
                 Tables\Columns\ImageColumn::make('product.image')->searchable(),
                 Tables\Columns\TextColumn::make('product.SKU')->sortable(),
                 Tables\Columns\TextColumn::make('product.name')->sortable(),
@@ -46,10 +67,10 @@ class OrderItemResource extends Resource
                         'canceled' => 'Canceled',
                     ])
                     ->colors([
-                        'secondary' => 'Pending',
-                        'warning' => 'Processing',
-                        'success' => 'Completed',
-                        'danger' => 'Canceled',
+                        'secondary' => 'pending',
+                        'warning' => 'processing',
+                        'success' => 'completed',
+                        'danger' => 'canceled',
                     ])->sortable(),
                 Tables\Columns\TextColumn::make('price')->prefix('$')->sortable(),
             ])
@@ -62,6 +83,10 @@ class OrderItemResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+                FilamentExportBulkAction::make('export'),
+            ])
+            ->headerActions([
+                FilamentExportHeaderAction::make('export')
             ]);
     }
 

@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\OrderResource\Pages;
 
-use App\Filament\Resources\OrderResource;
 use Filament\Pages\Actions;
+use App\Filament\Resources\OrderResource;
 use Filament\Resources\Pages\ListRecords;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class ListOrders extends ListRecords
 {
@@ -14,6 +15,13 @@ class ListOrders extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+
+    protected function getTableBulkActions(): array
+    {
+        return [
+            FilamentExportBulkAction::make('Export'),
         ];
     }
 }
