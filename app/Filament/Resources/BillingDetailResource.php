@@ -21,6 +21,8 @@ class BillingDetailResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document';
 
+    protected static ?string $navigationGroup = 'Customers';
+
     public static function form(Form $form): Form
     {
         return $form
