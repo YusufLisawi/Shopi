@@ -13,7 +13,7 @@
         </div>
         <div class="col-lg-12 col-mg-6"></div>
     </div>
-    <div class="widget-category mb-30 rounded-3xl border-slate-200">
+    <div class="widget-category mb-30 rounded-3xl border-slate-200  shadow-md">
         <h5 class="section-title style-1 mb-30 wow fadeIn animated">Categories</h5>
         <ul class="categories">
             @foreach ($categories as $category)
@@ -28,7 +28,7 @@
         </ul>
     </div>
     <!-- Fillter By Price -->
-    <div class="sidebar-widget price_range range mb-30 rounded-3xl border-slate-200" style="border-radius: 30px">
+    <div class="sidebar-widget price_range range mb-30 rounded-3xl border-slate-200 shadow-md" style="border-radius: 30px">
         <div class="widget-header position-relative mb-20 pb-10">
             <h5 class="widget-title mb-10">Filter by price</h5>
             <div class="bt-1 border-color-1"></div>

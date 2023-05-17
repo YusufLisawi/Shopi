@@ -8,6 +8,8 @@ use App\Models\Order;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use App\Events\OrderStatusChanged;
+use Filament\Forms\Components\Component;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\OrderResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -42,18 +44,6 @@ class OrderResource extends Resource
                         Forms\Components\TextInput::make('name')->disabled(),
                         Forms\Components\TextInput::make('email')->disabled(),
                     ]),
-                Forms\Components\Fieldset::make('user_id')
-                    ->relationship('user')
-                    ->label('Information about the buyer')
-                    ->schema([
-                        // Forms\Components\Fieldset::make('billingDetails')->disabled(),
-                        // ->relationship('billingDetails')
-                        // Forms\Components\TextInput::make('billing_address')->disabled(),
-                        // Forms\Components\TextInput::make('city')->disabled(),
-                        // Forms\Components\TextInput::make('country')->disabled(),
-                        // Forms\Components\TextInput::make('order_notes')->disabled(),
-                        ])
-                        ->disabled(),
             ]);
     }
 

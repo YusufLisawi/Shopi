@@ -2,6 +2,7 @@
     <section class="mt-50 mb-50">
         <div class="container">
             <div class="row">
+                @include('livewire.sidebar')
                 <div class="col-lg-9">
                     <div class="shop-product-fillter">
                         <div class="totall-product">
@@ -48,10 +49,10 @@
                     <div class="row product-grid-3">
                         @foreach ($products as $p)
                             <div class="col-lg-4 col-md-4 col-6 col-sm-6 ">
-                                <div class="product-cart-wrap mb-30 border-slate-200">
+                                <div class="product-cart-wrap mb-30 border-slate-200 shadow-md">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
-                                            <a href="{{ route('product.details', $p->id) }}">
+                                            <a href="{{ route('product.details', $p->id) }}" class="">
                                                 <img class="default-img" src="{{  asset('storage/'.$p->image) }}"
                                                     alt="{{$p->name}}">
                                             </a>
@@ -98,7 +99,6 @@
                     <!--pagination-->
                     {{ $products->links('pagination::tailwind') }}
                 </div>
-                @include('livewire.sidebar')
             </div>
         </div>
     </section>

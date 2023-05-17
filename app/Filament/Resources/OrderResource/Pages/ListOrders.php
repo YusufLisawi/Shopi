@@ -24,4 +24,9 @@ class ListOrders extends ListRecords
             FilamentExportBulkAction::make('Export'),
         ];
     }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

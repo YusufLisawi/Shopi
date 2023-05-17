@@ -5,9 +5,7 @@ Your order #{{ $order->id }} has been shipped.
 
 Thank you for your purchase!
 
-<x-mail::button :url="{{ url('/dashboard') }}">
-Track Order
-</x-mail::button>
+<a href="{{ url('/dashboard') }}" style="background-color: #ed8936; color: #ffffff; font-weight: bold; text-decoration: none; padding: 12px 24px; border-radius: 4px; display: inline-block;">View Your Order</a>
 
 Thanks,<br>
 {{ config('app.name') }}

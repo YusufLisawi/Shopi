@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Listeners\OrderCompletedListener;
 use App\Mail\OrderCompletedMail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Events\OrderStatusChanged;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
@@ -16,14 +16,30 @@ class Order extends Model
         'session_id',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::saved(function ($order) {
+            if ($order->status === 'completed' && $order->wasChanged('status')) {
+                event(new OrderStatusChanged($order));
+            }
+        });
+        static::updated(function ($order) {
+            if ($order->status === 'completed' && $order->wasChanged('status')) {
+                event(new OrderStatusChanged($order));
+            }
+        });
+        static::created(function ($order) {
+            if ($order->status === 'completed' && $order->wasChanged('status')) {
+                event(new OrderStatusChanged($order));
+            }
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
-    protected $dispatchesEvents = [
-        'saved' => OrderCompletedListener::class,
-    ];
 
     public function orderItems()
     {
