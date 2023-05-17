@@ -59,17 +59,14 @@
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
-                                        <div class="product-category">
+                                        <div class="product-category flex gap-2 mb-2">
                                             @foreach ($p->categories as $index => $cat)
-                                                <a class=""
-                                                    href="/?{{ http_build_query(array_merge(request()->query(), ['category' => $cat->slug])) }}"
-                                                    rel="tag">{{ $index === count($p->categories) - 1 && count($p->categories) > 1 && strlen($cat->name) > 15 ? substr($cat->name, 0, 3) . '...' : $cat->name }}</a>
-                                                @if ($index !== count($p->categories) - 1)
-                                                    ,
+                                                @if ($index < 4)
+                                                    <a class="bg-orange-400 py-1 px-2 text-white font-semibold rounded-full"
+                                                        href="/?{{ http_build_query(array_merge(request()->query(), ['category' => $cat->slug])) }}"
+                                                        rel="tag">{{ $cat->name }}</a>
                                                 @endif
                                             @endforeach
-
-
                                         </div>
                                         <h2>
                                             <a href="{{ route('product.details', $p->id) }}"
@@ -77,19 +74,21 @@
                                                 {{ strlen($p->name) > 20 ? substr($p->name, 0, 17) . '...': $p->name }}
                                             </a>
                                         </h2>
-                                        <div class="product-price">
-                                            <span>${{ $p->price }}</span>
-                                            <span class="old-price">${{ $p->old_price }}</span>
-                                        </div>
-                                        <div class="show flex justify-end mt-3">
-                                            <form action="{{ route('cart.add') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="product_id" value="{{ $p->id }}">
-                                                <button type="submit" class="btn btn-sm">
-                                                    <i class="fi-rs-shopping-cart-add"></i>
-                                                    Add to cart
-                                                </button>
-                                            </form>
+                                        <div class="flex items-center justify-between">
+                                            <div class="">
+                                                <p class="text-xl font-bold text-orange-500">${{ $p->price }}</p>
+                                                <p class="text-md line-through opacity-50">${{ $p->old_price }}</p>
+                                            </div>
+                                            <div class="show flex justify-end mt-3">
+                                                <form action="{{ route('cart.add') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $p->id }}">
+                                                    <a onclick="this.closest('form').submit()" class="text-orange-500 hover:text-black duration-100">
+                                                        {{-- Add to cart --}}
+                                                        <i class="fi-rs-shopping-cart-add text-3xl"></i>
+                                                    </a>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

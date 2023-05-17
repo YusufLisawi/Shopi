@@ -25,13 +25,15 @@
                                     @foreach (Cart::content() as $item)
                                         <tr>
                                             <td class="product-thumbnail ">
-                                                <a class="rounded-lg" href="{{ route('product.details', $item->model->id) }}">
-                                                <img  src="{{ asset('storage/'.$item->model->image) }}"
-                                                    alt="{{$item->model->name}}"></a>
+                                                <a class="rounded-lg"
+                                                    href="{{ route('product.details', $item->model->id) }}">
+                                                    <img src="{{ asset('storage/' . $item->model->image) }}"
+                                                        alt="{{ $item->model->name }}"></a>
                                             </td>
                                             <td class="">
                                                 <h5 class="text-lg font-medium ">
-                                                    <a href="{{ route('product.details', $item->model->id) }}">{{ ucfirst($item->model->name) }}</a>
+                                                    <a
+                                                        href="{{ route('product.details', $item->model->id) }}">{{ ucfirst($item->model->name) }}</a>
                                                 </h5>
                                                 <p class="font-xs">
                                                     {{ $item->model->brief_description }}
@@ -40,7 +42,8 @@
                                             <td class="price" data-title="Price"><span>${{ $item->model->price }}
                                                 </span></td>
                                             <td class="text-center" data-title="Stock">
-                                                <div class="border rounded-md px-2 py-1 flex items-center justify-between">
+                                                <div
+                                                    class="border rounded-md px-2 py-1 flex items-center justify-between">
                                                     <span class="qty-val">{{ $item->qty }}</span>
                                                     <div>
                                                         <form action="{{ route('qty.up') }}" method="post">
@@ -95,59 +98,61 @@
                             @endif
                         </table>
                     </div>
-                    <div class="cart-action text-end">
+                    {{-- <div class="cart-action text-end">
                         <a class="btn " href="{{ route('home') }}"><i class="fi-rs-shopping-bag mr-10"></i>Continue
                             Shopping</a>
-                    </div>
+                    </div> --}}
                     @if (Cart::count() > 0)
-                    <div class="divider my-12">
-                    </div>
-                    <div class="flex justify-center mb-50">
-                        <div class="col-lg-6 col-md-12">
-                            <div class="border p-md-4 p-30 rounded-xl cart-totals">
-                                <div class="mb-3">
-                                    <h1 class="text-lg font-semibold">Cart Totals</h1>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td class="cart_total_label">Cart Subtotal</td>
-                                                <td class="cart_total_amount"><span
-                                                        class="font-lg fw-900 text-brand">${{ Cart::subtotal() }}</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="cart_total_label">Shipping</td>
-                                                <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> Free
-                                                    Shipping</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="cart_total_label">Tax</td>
-                                                <td class="cart_total_amount">
-                                                    <i class="ti-gift mr-5"></i>
-                                                    <strong class="font-xl text-red-500">
-                                                        ${{ Cart::tax() }}
-                                                    </strong>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="cart_total_label">Total</td>
-                                                <td class="cart_total_amount">
-                                                    <strong><span class="font-xl fw-900 text-brand">
-                                                            ${{ Cart::total() }}
-                                                        </span></strong>
-                                                </td>
+                        <div class="flex justify-center mb-50">
+                            <div class="w-100">
+                                <div class=" rounded-xl cart-totals">
+                                    <div class="mb-3">
+                                        <h1 class="font-bold text-lg tracking-widest text-orange-500 mb-2 uppercase">
+                                            Cart total</h1>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="cart_total_label">Cart Subtotal</td>
+                                                    <td class="cart_total_amount"><span
+                                                            class="font-lg fw-900 text-brand">${{ Cart::subtotal() }}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="cart_total_label">Shipping</td>
+                                                    <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> Free
+                                                        Shipping</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="cart_total_label">Tax</td>
+                                                    <td class="cart_total_amount">
+                                                        <i class="ti-gift mr-5"></i>
+                                                        <strong class="font-xl text-red-500">
+                                                            ${{ Cart::tax() }}
+                                                        </strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="cart_total_label">Total</td>
+                                                    <td class="cart_total_amount">
+                                                        <strong><span class="font-xl fw-900 text-brand">
+                                                                ${{ Cart::total() }}
+                                                            </span></strong>
+                                                    </td>
 
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="cart-action text-end">
+                                        <a href="{{ route('checkout') }}" class="btn"> <i
+                                                class="fi-rs-box-alt mr-10"></i>
+                                            Proceed to Checkout</a>
+                                    </div>
                                 </div>
-                                <a href="{{ route('checkout') }}" class="btn"> <i class="fi-rs-box-alt mr-10"></i>
-                                    Proceed to Checkout</a>
                             </div>
                         </div>
-                    </div>
                 </div>
                 @endif
             </div>

@@ -24,11 +24,6 @@ class Order extends Model
                 event(new OrderStatusChanged($order));
             }
         });
-        static::updated(function ($order) {
-            if ($order->status === 'completed' && $order->wasChanged('status')) {
-                event(new OrderStatusChanged($order));
-            }
-        });
         static::created(function ($order) {
             if ($order->status === 'completed' && $order->wasChanged('status')) {
                 event(new OrderStatusChanged($order));

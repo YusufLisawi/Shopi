@@ -48,9 +48,10 @@
                                 <a href="{{ route('register') }}" class="btn btn-sm btn-default">Register</a>
                                 @endif
                                 @endauth
-                                <div class="header-action-icon-2">
+                                <div class="header-action-icon-2 ml-10">
                                     <a class="mini-cart-icon" href="{{ route('cart') }}">
-                                        <img alt="Yusuf Isawi" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
+                                        {{-- <img alt="Yusuf Isawi" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}"> --}}
+                                        <i class="fi-rs-shopping-cart text-3xl"></i>
                                         <span class="pro-count blue">{{Cart::count()}}</span>
                                     </a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 border-gray-200">

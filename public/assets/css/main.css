@@ -848,7 +848,6 @@ button.submit, button[type='submit'] {
   color: #ffffff;
   border: none;
   background-color: #f17612;
-  border: 1px solid #f17612;
   border-radius: 5px;
 }
 
@@ -3448,9 +3447,9 @@ table .product-thumbnail img {
 }
 
 .product-cart-wrap .product-action-1 button.small, .product-cart-wrap .product-action-1 a.action-btn.small {
-  width: 32px;
-  height: 32px;
-  line-height: 32px;
+  /* width: 32px; */
+  /* height: 32px; */
+  /* line-height: 32px; */
 }
 
 .product-cart-wrap .product-action-1 button.small i, .product-cart-wrap .product-action-1 a.action-btn.small i {
@@ -3669,9 +3668,9 @@ table .product-thumbnail img {
 }
 
 .product-cart-wrap .product-content-wrap .add-to-cart img {
-  width: 20px;
+  /* width: 20px; */
   display: inline-block;
-  margin-top: 11px;
+  /* margin-top: 11px; */
 }
 
 .product-cart-wrap .product-stock .status-bar {
