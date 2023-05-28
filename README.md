@@ -7,7 +7,7 @@
     npm install
     npm run dev && php artisan serve
 ```
-
+# Preview
 ![Screen Shot 2023-05-28 at 18 14 28](https://github.com/YusufLisawi/Shopi/assets/90868691/6c4d3cca-9c31-4fe8-bf4b-584581032edf)
 ![Screen Shot 2023-05-28 at 18 15 01](https://github.com/YusufLisawi/Shopi/assets/90868691/6f1b18fd-ade5-46e5-850d-91566f585faf)
 ![Screen Shot 2023-05-28 at 18 15 12](https://github.com/YusufLisawi/Shopi/assets/90868691/31f02ed2-bc14-41cb-9c6e-0d36b42e59e0)
