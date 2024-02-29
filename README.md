@@ -1,5 +1,5 @@
 Demo:
-<a href="https://isawi.tech/shopi">Click here</a>
+<a href="https://www.isawi.tech/projects/shopi">Click here</a>
 # Setup
 ```
     composer install
